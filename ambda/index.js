@@ -16,7 +16,40 @@ const LaunchRequestHandler = {
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            .reprompt(speakOutput)
+            //.reprompt(speakOutput)
+            .addDelegateDirective({
+                name: 'RegisterDeadlineIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            })
+            .getResponse();
+    }
+};
+const RegisterDeadlineIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RegisterDeadlineIntent';
+    },
+    handle(handlerInput) {
+        const {requestEnvelope, responseBuilder} = handlerInput;
+        const {intent} = requestEnvelope.request;
+
+        let speechText = handlerInput.t('REJECTED_MSG');
+
+        if (intent.confirmationStatus === 'CONFIRMED') {
+            const module = Alexa.getSlotValue(requestEnvelope, 'module');
+            const day = Alexa.getSlotValue(requestEnvelope, 'day');
+            const year = Alexa.getSlotValue(requestEnvelope, 'year');
+            const month = Alexa.getSlotValue(requestEnvelope, 'month');
+
+            speechText = handlerInput.t('REGISTER_MSG', {module: module, day: day, month: month, year: year}); // we'll save these values in the next module
+        } else {
+            const repromptText = handlerInput.t('HELP_MSG');
+            responseBuilder.reprompt(repromptText);
+        }
+        
+        return responseBuilder
+            .speak(speechText)
             .getResponse();
     }
 };
@@ -170,6 +203,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
+        RegisterDeadlineIntentHandler,
         IntentReflectorHandler)
     .addErrorHandlers(
         ErrorHandler)
