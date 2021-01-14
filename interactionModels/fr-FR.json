@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "mes échéances",
+            "invocationName": "my deadlines",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -64,6 +64,13 @@
                         "enregistre mon échéance",
                         "mon échéance de {module} est le {day} {month} {year}"
                     ]
+                },
+                {
+                    "name": "SayDeadlineIntent",
+                    "slots": [],
+                    "samples": [
+                        "quelle est la date de mon échéance "
+                    ]
                 }
             ],
             "types": [
@@ -110,7 +117,7 @@
                     "name": "RegisterDeadlineIntent",
                     "confirmationRequired": true,
                     "prompts": {
-                        "confirmation": "Confirm.Intent.196259841613"
+                        "confirmation": "Confirm.Intent.1447831070812"
                     },
                     "slots": [
                         {
@@ -119,12 +126,12 @@
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.196259841613.1085981111005"
+                                "elicitation": "Elicit.Slot.1447831070812.1306469708260"
                             },
                             "validations": [
                                 {
                                     "type": "hasEntityResolutionMatch",
-                                    "prompt": "Slot.Validation.196259841613.1085981111005.448337978473"
+                                    "prompt": "Slot.Validation.1447831070812.1306469708260.449729978350"
                                 }
                             ]
                         },
@@ -134,8 +141,20 @@
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.196259841613.1050198204761"
-                            }
+                                "elicitation": "Elicit.Slot.1041193612087.1249037879254"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isGreaterThanOrEqualTo",
+                                    "prompt": "Slot.Validation.1041193612087.1249037879254.1282007684679",
+                                    "value": "1"
+                                },
+                                {
+                                    "type": "isLessThanOrEqualTo",
+                                    "prompt": "Slot.Validation.1041193612087.1249037879254.594277708275",
+                                    "value": "31"
+                                }
+                            ]
                         },
                         {
                             "name": "month",
@@ -143,7 +162,7 @@
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.196259841613.950631906645"
+                                "elicitation": "Elicit.Slot.1041193612087.222701321853"
                             }
                         },
                         {
@@ -152,12 +171,12 @@
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.196259841613.1520262593453"
+                                "elicitation": "Elicit.Slot.1041193612087.554733939447"
                             },
                             "validations": [
                                 {
                                     "type": "isGreaterThanOrEqualTo",
-                                    "prompt": "Slot.Validation.196259841613.1520262593453.150371077668",
+                                    "prompt": "Slot.Validation.1041193612087.554733939447.1175627109572",
                                     "value": "2021"
                                 }
                             ]
@@ -169,7 +188,7 @@
         },
         "prompts": [
             {
-                "id": "Elicit.Slot.196259841613.1085981111005",
+                "id": "Elicit.Slot.1447831070812.1306469708260",
                 "variations": [
                     {
                         "type": "PlainText",
@@ -178,7 +197,7 @@
                 ]
             },
             {
-                "id": "Slot.Validation.196259841613.1085981111005.448337978473",
+                "id": "Slot.Validation.1447831070812.1306469708260.449729978350",
                 "variations": [
                     {
                         "type": "PlainText",
@@ -187,7 +206,7 @@
                 ]
             },
             {
-                "id": "Elicit.Slot.196259841613.1050198204761",
+                "id": "Elicit.Slot.1041193612087.1249037879254",
                 "variations": [
                     {
                         "type": "PlainText",
@@ -196,7 +215,7 @@
                 ]
             },
             {
-                "id": "Elicit.Slot.196259841613.950631906645",
+                "id": "Elicit.Slot.1041193612087.222701321853",
                 "variations": [
                     {
                         "type": "PlainText",
@@ -205,7 +224,25 @@
                 ]
             },
             {
-                "id": "Elicit.Slot.196259841613.1520262593453",
+                "id": "Slot.Validation.1041193612087.1249037879254.1282007684679",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{day} n'est pas un jour vallide. Donnez moi un autre jour valide"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.1041193612087.1249037879254.594277708275",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{day} n'est pas un jour vallide. Donnez moi un autre jour valide"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1041193612087.554733939447",
                 "variations": [
                     {
                         "type": "PlainText",
@@ -218,7 +255,7 @@
                 ]
             },
             {
-                "id": "Confirm.Intent.196259841613",
+                "id": "Confirm.Intent.1447831070812",
                 "variations": [
                     {
                         "type": "PlainText",
@@ -231,7 +268,7 @@
                 ]
             },
             {
-                "id": "Slot.Validation.196259841613.1520262593453.150371077668",
+                "id": "Slot.Validation.1041193612087.554733939447.1175627109572",
                 "variations": [
                     {
                         "type": "PlainText",
