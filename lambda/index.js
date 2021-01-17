@@ -140,7 +140,7 @@ const SayDeadlineIntentHandler = {
         if (dateAvailable){
             
             const timezone = 'Europe/Paris'; // provide yours here. we'll change this later to retrieve the timezone from the device
-            const birthdayData = logic.getdaysUntilDeadline(nameDeadline,day, month, year, timezone);
+            const birthdayData = logic.getdaysUntilDeadline(day, month, year, timezone);
             speechText = handlerInput.t('DAYS_LEFT_MSG', {count: birthdayData});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: nameDeadline});
             if (birthdayData === 0) { 

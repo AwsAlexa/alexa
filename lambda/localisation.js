@@ -36,6 +36,13 @@ module.exports = {
             HELP_MSG: 'Je peux me souvenir de votre date d\'échéance et vous dire le nombre de jours restant. Quel est votre choix ?',
             REPROMPT_MSG: `Pour obtenir plus d'informations sur ce que je peux faire pour vous, demandez-moi de l'aide. Si vous voulez quitter la Skill, dites simplement "stop". Quel est votre choix ?`,
             GOODBYE_MSG: 'Au revoir! ',
+            
+            YOURS_DEADLINES: " Vos échéances sont: ",
+            DATE_DEADLINE: " La date d\'échéance de {{nameDeadline}} est le {{day}} / {{month}} / {{year}}. ",
+            DATE_DEADLINE_UNTIL: " Il vous reste {{count}} jours avant cette date. ",
+            NO_DEADLINE_NAME: " Aucune échéance trouvé avec ce nom.",
+            
+           
             REFLECTOR_MSG: 'Vous avez invoqué l\'intention {{intent}}',
             FALLBACK_MSG: 'Désolé, je ne sais pas répondre à votre demande. Pouvez-vous reformuler?. ',
             ERROR_MSG: 'Désolé, je n\'ai pas compris. Pouvez-vous reformuler? ',
@@ -48,9 +55,6 @@ module.exports = {
             PROGRESSIVE_MSG: "Je recherche des célébrités nées aujourd'hui. ",
             API_ERROR_MSG: "Désolé, je n'arrive pas à me connecter à l'API externe pour obtenir des résultats. Veuillez réessayer plus tard. ",
             CONJUNCTION_MSG: ' et ',
-            TURNING_YO_MSG: [" qui vient d'avoir {{count}} an", " avec {{count}} an"],
-            TURNING_YO_MSG_plural: [" qui vient d'avoir {{count}} ans", " avec {{count}} ans"],
-            CELEBRITY_BIRTHDAYS_MSG: "Aujourd'hui, les célébrités suivantes fêtent leur anniversaire: ",
             ALSO_TODAY_MSG: "C'est aussi l'anniversaire de : ",
             POST_CELEBRITIES_HELP_MSG: "Voulez-vous connaitre le nombre de jours avant votre anniversaire ou bien enregistrer un rappel: quel est votre choix ? "
         }
