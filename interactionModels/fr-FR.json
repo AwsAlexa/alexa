@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "my deadlines",
+            "invocationName": "test my deadline",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -16,95 +16,252 @@
                     "samples": []
                 },
                 {
-                    "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
                     "name": "RegisterDeadlineIntent",
                     "slots": [
                         {
-                            "name": "module",
-                            "type": "ModuleSlotType",
+                            "name": "nameDeadline",
+                            "type": "AMAZON.FirstName",
                             "samples": [
-                                "le module de mon échéance est {module}",
-                                "{module}"
+                                "le {nameDeadline}",
+                                "{nameDeadline}"
                             ]
                         },
                         {
                             "name": "day",
                             "type": "AMAZON.NUMBER",
                             "samples": [
+                                "{day}",
                                 "le {day}",
-                                "le jour de cet échéance est le {day}",
-                                "{day}"
+                                "le {day} {month}",
+                                "le {day} {month} {year}",
+                                "mon échéance est pour le {day} {month}",
+                                "mon échéance est le {day} {month} {year}"
                             ]
                         },
                         {
                             "name": "month",
-                            "type": "AMAZON.Month",
+                            "type": "MonthSlotType",
                             "samples": [
-                                "le mois de cet échéance est le mois de {month}",
+                                "mon mois d'échéance est {month}",
+                                "le mois de {month}",
                                 "{month}",
-                                "le {month}",
-                                "le mois de cet échéance est {month}"
+                                "en {month}"
                             ]
                         },
                         {
                             "name": "year",
                             "type": "AMAZON.NUMBER",
                             "samples": [
-                                "l année d éxpiration de cette échéance est {year}",
-                                "cette échéance exprire en {year}",
-                                "le {year}",
+                                "en {year}",
+                                "l'année de mon échéance est {year}",
+                                "en {year}",
+                                "l'année {year}",
+                                "l'an {year}",
                                 "{year}"
                             ]
                         }
                     ],
                     "samples": [
-                        "enregistre mon échéance",
-                        "mon échéance de {module} est le {day} {month} {year}"
+                        "le {nameDeadline} pour {day} {month} {year}",
+                        "le {day} du mois de {month}",
+                        "le {day} du mois d' {month}",
+                        "le {day} {month} de l'année {year}",
+                        "enregistre une nouvelle échéance",
+                        "enregistrer ma date d'échéance",
+                        "enregistrer mon échéance",
+                        "mon échéance est le {day} {month} {year}",
+                        "mon échéance est le {day} {month}",
+                        "ma date d'échéance est le {day} {month} {year}",
+                        "ma date d'échéance est le {day} {month}",
+                        "le {day} {month} {year}"
                     ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
                 },
                 {
                     "name": "SayDeadlineIntent",
                     "slots": [],
                     "samples": [
-                        "quelle est la date de mon échéance "
+                        "me dire le nombre de jours avant mon échéance",
+                        "dis-moi combien de temps reste-t-il avant mon échéance",
+                        "dis-moi quand est mon échéance",
+                        "quand est mon échéance",
+                        "il reste combien de temps avant mon échéance",
+                        "il reste combien de jours avant mon échéance",
+                        "combien de temps reste-t-il",
+                        "combien de temps reste-t-il avant mon échéance",
+                        "combien de jours reste-t-il",
+                        "combien de jours reste-t-il avant mon échéance",
+                        "combien de jours avant mon échéance",
+                        "nombre de jours restant",
+                        "nombre de jours restant avant mon échéance",
+                        "nombre de jours avant mon échéance"
+                    ]
+                },
+                {
+                    "name": "ChangeDateIntent",
+                    "slots": [
+                        {
+                            "name": "nameDeadline",
+                            "type": "AMAZON.FirstName",
+                            "samples": [
+                                "le {nameDeadline}",
+                                "{nameDeadline}"
+                            ]
+                        },
+                        {
+                            "name": "day",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{day}",
+                                "le {day}",
+                                "le {day} {month}",
+                                "le {day} {month} {year}",
+                                "je suis né le {day} {month}",
+                                "je suis né le {day} {month} {year}"
+                            ]
+                        },
+                        {
+                            "name": "month",
+                            "type": "MonthSlotType",
+                            "samples": [
+                                "mon mois de naissance est {month}",
+                                "je suis né le mois de {month}",
+                                "{month}",
+                                "en {month}"
+                            ]
+                        },
+                        {
+                            "name": "year",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "je suis né en {year}",
+                                "mon année de naissance est {year}",
+                                "en {year}",
+                                "l'année {year}",
+                                "l'an {year}",
+                                "{year}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "Change ma date d' échéance",
+                        "{day} {month} {year}",
+                        "le {day} {month} {year} "
+                    ]
+                },
+                {
+                    "name": "GetRemoteDataIntent",
+                    "slots": [],
+                    "samples": [
+                        "lister mes échéances"
+                    ]
+                },
+                {
+                    "name": "GetNextDeadlineIntent",
+                    "slots": [],
+                    "samples": [
+                        "Dis-moi la prochaine échéance",
+                        "la prochaine échéance"
+                    ]
+                },
+                {
+                    "name": "GetDateDeadlineIntent",
+                    "slots": [
+                        {
+                            "name": "nameDeadline",
+                            "type": "AMAZON.FirstName",
+                            "samples": [
+                                "le {nameDeadline}",
+                                "{nameDeadline}"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "donner la date d'échéance ",
+                        "date d'échéance pour le {nameDeadline}"
                     ]
                 }
             ],
             "types": [
                 {
-                    "name": "ModuleSlotType",
+                    "name": "MonthSlotType",
                     "values": [
                         {
-                            "id": "1",
+                            "id": "12",
                             "name": {
-                                "value": "edge-computing"
+                                "value": "décembre"
                             }
                         },
                         {
-                            "id": "2",
+                            "id": "11",
                             "name": {
-                                "value": "pa"
+                                "value": "novembre"
                             }
                         },
                         {
-                            "id": "3",
+                            "id": "10",
                             "name": {
-                                "value": "watchios"
+                                "value": "octobre"
                             }
                         },
                         {
-                            "id": "4",
+                            "id": "09",
                             "name": {
-                                "value": "machine-learning"
+                                "value": "septembre"
                             }
                         },
                         {
-                            "id": "5",
+                            "id": "08",
                             "name": {
-                                "value": "aws"
+                                "value": "août"
+                            }
+                        },
+                        {
+                            "id": "07",
+                            "name": {
+                                "value": "juillet"
+                            }
+                        },
+                        {
+                            "id": "06",
+                            "name": {
+                                "value": "juin"
+                            }
+                        },
+                        {
+                            "id": "05",
+                            "name": {
+                                "value": "mai"
+                            }
+                        },
+                        {
+                            "id": "04",
+                            "name": {
+                                "value": "avril"
+                            }
+                        },
+                        {
+                            "id": "03",
+                            "name": {
+                                "value": "mars"
+                            }
+                        },
+                        {
+                            "id": "02",
+                            "name": {
+                                "value": "février"
+                            }
+                        },
+                        {
+                            "id": "01",
+                            "name": {
+                                "value": "janvier",
+                                "synonyms": [
+                                    "premier mois de l'année"
+                                ]
                             }
                         }
                     ]
@@ -117,23 +274,17 @@
                     "name": "RegisterDeadlineIntent",
                     "confirmationRequired": true,
                     "prompts": {
-                        "confirmation": "Confirm.Intent.1447831070812"
+                        "confirmation": "Confirm.Intent.746177723927"
                     },
                     "slots": [
                         {
-                            "name": "module",
-                            "type": "ModuleSlotType",
+                            "name": "nameDeadline",
+                            "type": "AMAZON.FirstName",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.1447831070812.1306469708260"
-                            },
-                            "validations": [
-                                {
-                                    "type": "hasEntityResolutionMatch",
-                                    "prompt": "Slot.Validation.1447831070812.1306469708260.449729978350"
-                                }
-                            ]
+                                "elicitation": "Elicit.Slot.773308306416.296508396837"
+                            }
                         },
                         {
                             "name": "day",
@@ -141,29 +292,35 @@
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.1041193612087.1249037879254"
+                                "elicitation": "Elicit.Slot.653974572406.1040382425372"
                             },
                             "validations": [
                                 {
                                     "type": "isGreaterThanOrEqualTo",
-                                    "prompt": "Slot.Validation.1041193612087.1249037879254.1282007684679",
+                                    "prompt": "Slot.Validation.190694681136.1424851421300.1030431910159",
                                     "value": "1"
                                 },
                                 {
                                     "type": "isLessThanOrEqualTo",
-                                    "prompt": "Slot.Validation.1041193612087.1249037879254.594277708275",
+                                    "prompt": "Slot.Validation.190694681136.1424851421300.837658517617",
                                     "value": "31"
                                 }
                             ]
                         },
                         {
                             "name": "month",
-                            "type": "AMAZON.Month",
+                            "type": "MonthSlotType",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.1041193612087.222701321853"
-                            }
+                                "elicitation": "Elicit.Slot.282358190483.487594834711"
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.190694681136.463018349705.1461889218555"
+                                }
+                            ]
                         },
                         {
                             "name": "year",
@@ -171,15 +328,99 @@
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.1041193612087.554733939447"
+                                "elicitation": "Elicit.Slot.1253554922892.1358447173887"
                             },
                             "validations": [
                                 {
                                     "type": "isGreaterThanOrEqualTo",
-                                    "prompt": "Slot.Validation.1041193612087.554733939447.1175627109572",
+                                    "prompt": "Slot.Validation.773308306416.340968876770.1226683121718",
                                     "value": "2021"
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    "name": "ChangeDateIntent",
+                    "confirmationRequired": true,
+                    "prompts": {
+                        "confirmation": "Confirm.Intent.815067956585"
+                    },
+                    "slots": [
+                        {
+                            "name": "nameDeadline",
+                            "type": "AMAZON.FirstName",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "day",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.653974572406.1040382425372"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isGreaterThanOrEqualTo",
+                                    "prompt": "Slot.Validation.190694681136.1424851421300.1030431910159",
+                                    "value": "1"
+                                },
+                                {
+                                    "type": "isLessThanOrEqualTo",
+                                    "prompt": "Slot.Validation.190694681136.1424851421300.837658517617",
+                                    "value": "31"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "month",
+                            "type": "MonthSlotType",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.282358190483.487594834711"
+                            },
+                            "validations": [
+                                {
+                                    "type": "hasEntityResolutionMatch",
+                                    "prompt": "Slot.Validation.190694681136.463018349705.1461889218555"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "year",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1253554922892.1358447173887"
+                            },
+                            "validations": [
+                                {
+                                    "type": "isGreaterThanOrEqualTo",
+                                    "prompt": "Slot.Validation.773308306416.340968876770.1226683121718",
+                                    "value": "2021"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "GetDateDeadlineIntent",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "nameDeadline",
+                            "type": "AMAZON.FirstName",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1306558034700.598787697786"
+                            }
                         }
                     ]
                 }
@@ -188,91 +429,173 @@
         },
         "prompts": [
             {
-                "id": "Elicit.Slot.1447831070812.1306469708260",
+                "id": "Elicit.Slot.653974572406.1040382425372",
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "quel est le module de cette échéance?"
-                    }
-                ]
-            },
-            {
-                "id": "Slot.Validation.1447831070812.1306469708260.449729978350",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "{module} n est pas un module valide. Quel est le module de votre échéance?"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.1041193612087.1249037879254",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Donnez moi le jour de cet échéance"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.1041193612087.222701321853",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Quel est le mois de cet échéance ?"
-                    }
-                ]
-            },
-            {
-                "id": "Slot.Validation.1041193612087.1249037879254.1282007684679",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "{day} n'est pas un jour vallide. Donnez moi un autre jour valide"
-                    }
-                ]
-            },
-            {
-                "id": "Slot.Validation.1041193612087.1249037879254.594277708275",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "{day} n'est pas un jour vallide. Donnez moi un autre jour valide"
-                    }
-                ]
-            },
-            {
-                "id": "Elicit.Slot.1041193612087.554733939447",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "quelle est l année de cette échéance?"
+                        "value": "Quel est votre jour d'échéance ?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "Ce délais expire dans quelle année?"
-                    }
-                ]
-            },
-            {
-                "id": "Confirm.Intent.1447831070812",
-                "variations": [
-                    {
-                        "type": "PlainText",
-                        "value": "Voulez-vous enregistrer le {day} {month} {year} comme date d échéance du {module} ?"
+                        "value": "Quel jour?"
                     },
                     {
                         "type": "PlainText",
-                        "value": "l échéance de {module} est le {day} {month} {year} , c est bien ça?"
+                        "value": "Dites-moi votre jour d'échéance ?"
                     }
                 ]
             },
             {
-                "id": "Slot.Validation.1041193612087.554733939447.1175627109572",
+                "id": "Elicit.Slot.282358190483.487594834711",
                 "variations": [
                     {
                         "type": "PlainText",
-                        "value": "{year} est une date passée. Quelle est la vrai année d éxpiration de cette échéance"
+                        "value": "le {day} de quel mois ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quel est votre mois d'échéance ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quel mois?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Dites-moi votre mois d'échéance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.190694681136.1424851421300.1030431910159",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{day} n'est pas un jour valide. Dites-moi un jour plus grand que zéro?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.190694681136.1424851421300.837658517617",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Un mois a au maximum trente et un jours, {day} n'est pas possible. Quel est votre jour d'échéance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.190694681136.463018349705.1461889218555",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{month} n'est pas un mois. Quel est votre mois d'échéance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1253554922892.1358447173887",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Le {day} {month} de quelle année ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Quelle est votre année d'échéance ?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Dites-moi votre année d'échéance ?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.746177723927",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "le {nameDeadline} pour {month} {year} , c'est bien ça?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Voulez-vous enregistrer le  {day} {month} {year} comme votre date d'échéance pour {nameDeadline} ?"
+                    }
+                ]
+            },
+            {
+                "id": "Slot.Validation.773308306416.340968876770.1226683121718",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "cette année est déjà passée. donnez moi une année valide"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.773308306416.296508396837",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "quel est le nom de l'échéance?"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.815067956585",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Voulez-vous enregistrer le  {day} {month} {year} comme votre date d'échéance "
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "la nouvel date d'échéance  est le {day} {month} {year} , c'est bien ça ?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.815067956585.1422172398154",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "l'année "
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.815067956585.1534736050435",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "le mois"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.815067956585.118432079115",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "le jour"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.1306558034700.598787697786",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "donner moi le nom de l'échéance"
+                    }
+                ]
+            },
+            {
+                "id": "Confirm.Intent.1365761017334",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "{nameDeadline} c'est bien ça?"
                     }
                 ]
             }
