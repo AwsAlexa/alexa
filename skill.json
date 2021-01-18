@@ -1,0 +1,57 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:211085644962:function:c62acc32-ceb3-4e9e-95f2-a7128553ef74:Release_0"
+        },
+        "interfaces": [],
+        "regions": {
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:211085644962:function:c62acc32-ceb3-4e9e-95f2-a7128553ef74:Release_0"
+            }
+          },
+          "EU": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:eu-west-1:211085644962:function:c62acc32-ceb3-4e9e-95f2-a7128553ef74:Release_0"
+            }
+          },
+          "FE": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-west-2:211085644962:function:c62acc32-ceb3-4e9e-95f2-a7128553ef74:Release_0"
+            }
+          }
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::profile:given_name:read"
+      },
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ],
+    "publishingInformation": {
+      "category": "KNOWLEDGE_AND_TRIVIA",
+      "distributionCountries": [],
+      "isAvailableWorldwide": true,
+      "locales": {
+        "fr-FR": {
+          "description": "Sample Full Description",
+          "examplePhrases": [
+            "Alexa ouvre le génie des salutations",
+            "bonjour",
+            "aide"
+          ],
+          "keywords": [],
+          "name": "test",
+          "summary": "Sample Short Description"
+        }
+      },
+      "testingInstructions": "Sample Testing Instructions."
+    }
+  }
+}

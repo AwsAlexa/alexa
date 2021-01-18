@@ -1,5 +1,5 @@
 const Alexa = require('ask-sdk-core');
-//const util = require('./util');
+const util = require('./util');
 
 const moment = require('moment-timezone');
 const languageStrings = require('./localisation');
@@ -12,7 +12,7 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 var persistenceAdapter = getPersistenceAdapter();
 
 function getPersistenceAdapter(tableName) {
-    // This function is an indirect way to detect if this is part of an Alexa-Hosted skill
+   
     function isAlexaHosted() {
         return process.env.S3_PERSISTENCE_BUCKET;
     }
@@ -43,16 +43,18 @@ const LaunchRequestHandler = {
         }
         let speechText = !sessionCounter ? handlerInput.t('WELCOME_MSG') : handlerInput.t('WELCOME_BACK_MSG');
         speechText += handlerInput.t('MISSING_MSG');
+         speechText += handlerInput.t('REGISTER_FIRST_DEADLINE');
 
-        // we use intent chaining to trigger the birthday registration multi-turn
+       
         return handlerInput.responseBuilder
             .speak(speechText)
-            // we use intent chaining to trigger the birthday registration multi-turn
-            .addDelegateDirective({
+            
+           /* .addDelegateDirective({
                 name: 'RegisterDeadlineIntent',
                 confirmationStatus: 'NONE',
                 slots: {}
-            })
+            })*/
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
     }
 };
@@ -80,10 +82,8 @@ const RegisterDeadlineIntentHandler = {
             sessionAttributes['month'] = month; //MM
             sessionAttributes['monthName'] = monthName;
             sessionAttributes['year'] = year;
-            // we can't use intent chaining because the target intent is not dialog based
             return SayDeadlineIntentHandler.handle(handlerInput);
         }
-
         return handlerInput.responseBuilder
             .speak(handlerInput.t('REJECTED_MSG'))
             .reprompt(handlerInput.t('REPROMPT_MSG'))
@@ -106,8 +106,6 @@ const ChangeDateIntentHandler = {
             const monthName = monthSlot.value;
             const month = monthSlot.resolutions.resolutionsPerAuthority[0].values[0].value.id; //MM
             const year = Alexa.getSlotValue(requestEnvelope, 'year');
-            
-           // sessionAttributes['nameDeadline'] = nameDeadline;
             sessionAttributes['day'] = day;
             sessionAttributes['month'] = month; //MM
             sessionAttributes['monthName'] = monthName;
@@ -134,14 +132,17 @@ const SayDeadlineIntentHandler = {
         const day = sessionAttributes['day'];
         const month = sessionAttributes['month']; //MM
         const year = sessionAttributes['year'];
+        const timezone = sessionAttributes['timezone'];
+        const name = sessionAttributes['name'];
 
         let speechText = '';
         const dateAvailable = nameDeadline && day && month && year;
         if (dateAvailable){
-            
-            const timezone = 'Europe/Paris'; // provide yours here. we'll change this later to retrieve the timezone from the device
+            if (!timezone) {
+                return responseBuilder.speak(t('NO_TIMEZONE_MSG')).getResponse();
+            }
             const birthdayData = logic.getdaysUntilDeadline(day, month, year, timezone);
-            speechText = handlerInput.t('DAYS_LEFT_MSG', {count: birthdayData});
+            speechText = handlerInput.t('DAYS_LEFT_MSG', {name, count: birthdayData});
             speechText += handlerInput.t('WILL_TURN_MSG', {count: nameDeadline});
             if (birthdayData === 0) { 
                 speechText = handlerInput.t('GREET_MSG', {count: nameDeadline});
@@ -151,12 +152,11 @@ const SayDeadlineIntentHandler = {
             speechText += handlerInput.t('MISSING_MSG');
             
             handlerInput.responseBuilder.addDelegateDirective({
-                name: 'ChangeDateIntent',
+                name: 'RegisterDateIntent',
                 confirmationStatus: 'NONE',
                 slots: {}
             });
         }
-
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(handlerInput.t('REPROMPT_MSG'))
@@ -172,7 +172,14 @@ const GetDeadlinesListDataHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GetRemoteDataIntent');
   },
   async handle(handlerInput) {
-       const timezone = 'Europe/Paris';
+        const {attributesManager, requestEnvelope, responseBuilder, t} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const {intent} = requestEnvelope.request;
+        const name = sessionAttributes['name'];
+        const timezone = sessionAttributes['timezone'];
+        if (!timezone) {
+            return responseBuilder.speechText(t('NO_TIMEZONE_MSG')).getResponse();
+        }
        let outputSpeech = ''
  
    await logic.getRemoteData(constants.API_URL)
@@ -188,8 +195,6 @@ const GetDeadlinesListDataHandler = {
       .speak(outputSpeech)
       .reprompt(handlerInput.t('REPROMPT_MSG'))
       .getResponse();
-      //.speak(outputSpeech)
-      //.getResponse();
   },
 };
 
@@ -200,19 +205,24 @@ const GetNextDeadlineIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GetNextDeadlineIntent');
   },
   async handle(handlerInput) {
-       const timezone = 'Europe/Paris';
+       const {attributesManager, requestEnvelope, responseBuilder, t} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const {intent} = requestEnvelope.request;
+        const name = sessionAttributes['name'];
+        const timezone = sessionAttributes['timezone'];
+        if (!timezone) {
+            return responseBuilder.speechText(t('NO_TIMEZONE_MSG')).getResponse();
+        }
        let outputSpeech = ''
  
    await logic.getRemoteData(constants.API_URL)
       .then((response) => {
         const data = JSON.parse(response);
          const Nextdeadline = logic.getNextDeadline(data, timezone).nextDeadline;
-         
          const daysUntilNextDeadline = logic.getNextDeadline(data,timezone).minDaysUntil;
-         outputSpeech += "il reste ";
-         outputSpeech += daysUntilNextDeadline;
-         outputSpeech += "pour  ";
-         outputSpeech += Nextdeadline.title;
+         
+         outputSpeech += t('NEXT_DEADLINE', {nameDeadline: Nextdeadline.title});
+         outputSpeech += t('DATE_DEADLINE_UNTIL', {count: daysUntilNextDeadline});
       })
       .catch((err) => {
         console.log(`ERROR: ${err.message}`);
@@ -232,11 +242,15 @@ const GetDateDeadlineIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'GetDateDeadlineIntent');
   },
   async handle(handlerInput) {
-       const {attributesManager, requestEnvelope} = handlerInput;
-       const {intent} = requestEnvelope.request;
-       const timezone = 'Europe/Paris';
+        const {attributesManager, requestEnvelope, responseBuilder, t} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const {intent} = requestEnvelope.request;
+        const name = sessionAttributes['name'];
+        const timezone = sessionAttributes['timezone'];
+        if (!timezone) {
+            return responseBuilder.speechText(t('NO_TIMEZONE_MSG')).getResponse();
+        }
        let outputSpeech = ''
-       
            const nameDeadline = Alexa.getSlotValue(requestEnvelope, 'nameDeadline');
             await logic.getRemoteData(constants.API_URL)
            .then((response) => {
@@ -247,15 +261,143 @@ const GetDateDeadlineIntentHandler = {
             .catch((err) => {
                 console.log(`ERROR: ${err.message}`);
             });
-      
             return handlerInput.responseBuilder
             .speak(outputSpeech)
             .reprompt(handlerInput.t('REPROMPT_MSG'))
             .getResponse();
-      
     },
 };
 
+
+const RemindDeadlineIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RemindDeadlineIntent';
+    },
+    async handle(handlerInput) {
+        const {attributesManager, serviceClientFactory, requestEnvelope} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const {intent} = requestEnvelope.request;
+
+        const day = sessionAttributes['day'];
+        const month = sessionAttributes['month'];
+        const year = sessionAttributes['year'];
+        const name = sessionAttributes['name'] || '';
+        let timezone = sessionAttributes['timezone'];
+        const message = Alexa.getSlotValue(requestEnvelope, 'message');
+
+        if (intent.confirmationStatus !== 'CONFIRMED') {
+            return handlerInput.responseBuilder
+                .speak(handlerInput.t('CANCEL_MSG') + handlerInput.t('REPROMPT_MSG'))
+                .reprompt(handlerInput.t('REPROMPT_MSG'))
+                .getResponse();
+        }
+
+        let speechText = '';
+        const dateAvailable = day && month && year;
+        if (dateAvailable){
+            if (!timezone){
+                //timezone = 'Europe/Rome';  // so it works on the simulator, you should uncomment this line, replace with your time zone and comment sentence below
+                return handlerInput.responseBuilder
+                    .speak(handlerInput.t('NO_TIMEZONE_MSG'))
+                    .getResponse();
+            }
+
+            const daysUntilDeadline = logic.getdaysUntilDeadline(day, month, year, timezone);
+
+            // let's create a reminder via the Reminders API
+            // don't forget to enable this permission in your skill configuratiuon (Build tab -> Permissions)
+            // or you'll get a SessionEnndedRequest with an ERROR of type INVALID_RESPONSE
+            try {
+                const {permissions} = requestEnvelope.context.System.user;
+                if (!(permissions && permissions.consentToken)){
+                    throw {status: 401, message: 'No permission available'};
+                }
+                
+                  // there are zero permissions, no point in intializing the API
+                const reminderServiceClient = serviceClientFactory.getReminderManagementServiceClient();
+                // reminders are retained for 3 days after they 'remind' the customer before being deleted
+                const remindersList = await reminderServiceClient.getReminders();
+                console.log('Current reminders: ' + JSON.stringify(remindersList));
+                // delete previous reminder if present
+                const previousReminder = sessionAttributes['reminderId'];
+                if (previousReminder){
+                    try {
+                        if (remindersList.totalCount !== "0") {
+                            await reminderServiceClient.deleteReminder(previousReminder);
+                            delete sessionAttributes['reminderId'];
+                            console.log('Deleted previous reminder token: ' + previousReminder);
+                        }
+                    } catch (error) {
+                        // fail silently as this means the reminder does not exist or there was a problem with deletion
+                        // either way, we can move on and create the new reminder
+                        console.log('Failed to delete reminder: ' + previousReminder + ' via ' + JSON.stringify(error));
+                    }
+                }
+                // create reminder structure
+                const reminder = logic.createDeadlineReminder(
+                    daysUntilDeadline,
+                    timezone,
+                    Alexa.getLocale(requestEnvelope),
+                    message);
+                const reminderResponse = await reminderServiceClient.createReminder(reminder); // the response will include an "alertToken" which you can use to refer to this reminder
+                // save reminder id in session attributes
+                sessionAttributes['reminderId'] = reminderResponse.alertToken;
+                console.log('Reminder created with token: ' + reminderResponse.alertToken);
+                speechText = handlerInput.t('REMINDER_CREATED_MSG', {name: name});
+                speechText += handlerInput.t('POST_REMINDER_HELP_MSG');
+            } catch (error) {
+                console.log(JSON.stringify(error));
+                switch (error.statusCode) {
+                    case 401: // the user has to enable the permissions for reminders, let's attach a permissions card to the response
+                    
+                    
+                     return handlerInput.responseBuilder
+                    .speak("I didn't hear your answer. This skill requires your permission.")
+                    .addDirective({
+                      type: "Connections.SendRequest",
+                      name: "AskFor",
+                      payload: {
+                        "@type": "AskForPermissionsConsentRequest",
+                        "@version": "1",
+                        "permissionScope": "alexa::alerts:reminders:skill:readwrite"
+                      },
+                      token: "user-id-could-go-here"
+                    })
+                    .getResponse();
+                
+                        //handlerInput.responseBuilder.withAskForPermissionsConsentCard(constants.REMINDERS_PERMISSION);
+                       // speechText = handlerInput.t('MISSING_PERMISSION_MSG');
+                        break;
+                    case 403: // devices such as the simulator do not support reminder management
+                        speechText = handlerInput.t('UNSUPPORTED_DEVICE_MSG');
+                        break;
+                    //case 405: METHOD_NOT_ALLOWED, please contact the Alexa team
+                    default:
+                        speechText = handlerInput.t('REMINDER_ERROR_MSG');
+                }
+                speechText += handlerInput.t('REPROMPT_MSG');
+            }
+        } else {
+            speechText += handlerInput.t('MISSING_MSG');
+            // we use intent chaining to trigger the birthday registration multi-turn
+            handlerInput.responseBuilder.addDelegateDirective({
+                name: 'RegisterDeadlineIntent',
+                confirmationStatus: 'NONE',
+                slots: {}
+            });
+        }
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(handlerInput.t('REPROMPT_MSG'))
+            .getResponse();
+    }
+};
+
+
+
+    
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -278,7 +420,10 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = handlerInput.t('GOODBYE_MSG');
+        const {t, attributesManager} = handlerInput
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        const name = sessionAttributes['name']
+        const speechText = handlerInput.t('GOODBYE_MSG', {name});
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -307,8 +452,7 @@ const SessionEndedRequestHandler = {
     },
     handle(handlerInput) {
         console.log(`~~~~ Session ended: ${JSON.stringify(handlerInput.requestEnvelope)}`);
-        // Any cleanup logic goes here.
-        return handlerInput.responseBuilder.getResponse(); // notice we send an empty response
+        return handlerInput.responseBuilder.getResponse(); 
     }
 };
 
@@ -322,7 +466,6 @@ const IntentReflectorHandler = {
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
 };
@@ -351,8 +494,10 @@ exports.handler = Alexa.SkillBuilders.custom()
         GetDeadlinesListDataHandler,
         GetNextDeadlineIntentHandler,
         GetDateDeadlineIntentHandler,
+        RemindDeadlineIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
+       // ConnectionsResponsetHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
         IntentReflectorHandler)
@@ -361,11 +506,13 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestInterceptors(
         interceptors.LocalisationRequestInterceptor,
         interceptors.LoggingRequestInterceptor,
-        interceptors.LoadAttributesRequestInterceptor)
+        interceptors.LoadAttributesRequestInterceptor,
+         interceptors.LoadNameRequestInterceptor,
+        interceptors.LoadTimezoneRequestInterceptor)
     .addResponseInterceptors(
         interceptors.LoggingResponseInterceptor,
         interceptors.SaveAttributesResponseInterceptor)
-    .withPersistenceAdapter(persistenceAdapter)
+   .withPersistenceAdapter(persistenceAdapter)
     .withApiClient(new Alexa.DefaultApiClient())
-    .withCustomUserAgent('sample/happy-birthday/mod4')
+    .withCustomUserAgent('sample/my_deadlines/')
     .lambda();

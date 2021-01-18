@@ -1,0 +1,688 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "test my deadline",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "RegisterDeadlineIntent",
+          "slots": [
+            {
+              "name": "nameDeadline",
+              "type": "AMAZON.FirstName",
+              "samples": [
+                "le {nameDeadline}",
+                "{nameDeadline}"
+              ]
+            },
+            {
+              "name": "day",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{day}",
+                "le {day}",
+                "le {day} {month}",
+                "le {day} {month} {year}",
+                "mon échéance est pour le {day} {month}",
+                "mon échéance est le {day} {month} {year}"
+              ]
+            },
+            {
+              "name": "month",
+              "type": "MonthSlotType",
+              "samples": [
+                "mon mois d\u0027échéance est {month}",
+                "le mois de {month}",
+                "{month}",
+                "en {month}"
+              ]
+            },
+            {
+              "name": "year",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "en {year}",
+                "l\u0027année de mon échéance est {year}",
+                "en {year}",
+                "l\u0027année {year}",
+                "l\u0027an {year}",
+                "{year}"
+              ]
+            }
+          ],
+          "samples": [
+            "le {nameDeadline} pour {day} {month} {year}",
+            "le {day} du mois de {month}",
+            "le {day} du mois d\u0027 {month}",
+            "le {day} {month} de l\u0027année {year}",
+            "enregistre une nouvelle échéance",
+            "enregistrer ma date d\u0027échéance",
+            "enregistrer mon échéance",
+            "mon échéance est le {day} {month} {year}",
+            "mon échéance est le {day} {month}",
+            "ma date d\u0027échéance est le {day} {month} {year}",
+            "ma date d\u0027échéance est le {day} {month}",
+            "le {day} {month} {year}"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "SayDeadlineIntent",
+          "slots": [],
+          "samples": [
+            "me dire le nombre de jours avant mon échéance",
+            "dis-moi combien de temps reste-t-il avant mon échéance",
+            "dis-moi quand est mon échéance",
+            "quand est mon échéance",
+            "il reste combien de temps avant mon échéance",
+            "il reste combien de jours avant mon échéance",
+            "combien de temps reste-t-il",
+            "combien de temps reste-t-il avant mon échéance",
+            "combien de jours reste-t-il",
+            "combien de jours reste-t-il avant mon échéance",
+            "combien de jours avant mon échéance",
+            "nombre de jours restant",
+            "nombre de jours restant avant mon échéance",
+            "nombre de jours avant mon échéance"
+          ]
+        },
+        {
+          "name": "ChangeDateIntent",
+          "slots": [
+            {
+              "name": "nameDeadline",
+              "type": "AMAZON.FirstName",
+              "samples": [
+                "le {nameDeadline}",
+                "{nameDeadline}"
+              ]
+            },
+            {
+              "name": "day",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{day}",
+                "le {day}",
+                "le {day} {month}",
+                "le {day} {month} {year}",
+                "je suis né le {day} {month}",
+                "je suis né le {day} {month} {year}"
+              ]
+            },
+            {
+              "name": "month",
+              "type": "MonthSlotType",
+              "samples": [
+                "mon mois de naissance est {month}",
+                "je suis né le mois de {month}",
+                "{month}",
+                "en {month}"
+              ]
+            },
+            {
+              "name": "year",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "je suis né en {year}",
+                "mon année de naissance est {year}",
+                "en {year}",
+                "l\u0027année {year}",
+                "l\u0027an {year}",
+                "{year}"
+              ]
+            }
+          ],
+          "samples": [
+            "Change ma date d\u0027 échéance",
+            "{day} {month} {year}",
+            "le {day} {month} {year} "
+          ]
+        },
+        {
+          "name": "GetRemoteDataIntent",
+          "slots": [],
+          "samples": [
+            "lister mes échéances"
+          ]
+        },
+        {
+          "name": "GetNextDeadlineIntent",
+          "slots": [],
+          "samples": [
+            "Dis-moi la prochaine échéance",
+            "la prochaine échéance"
+          ]
+        },
+        {
+          "name": "GetDateDeadlineIntent",
+          "slots": [
+            {
+              "name": "nameDeadline",
+              "type": "AMAZON.FirstName",
+              "samples": [
+                "le {nameDeadline}",
+                "{nameDeadline}"
+              ]
+            }
+          ],
+          "samples": [
+            "donner la date d\u0027échéance ",
+            "date d\u0027échéance pour le {nameDeadline}"
+          ]
+        },
+        {
+          "name": "RemindDeadlineIntent",
+          "slots": [
+            {
+              "name": "message",
+              "type": "AMAZON.SearchQuery",
+              "samples": [
+                "{message}"
+              ]
+            }
+          ],
+          "samples": [
+            "créer un rappel avec le message {message}",
+            "créer un rappel avec le message suivant {message}",
+            "créer un rappel avec le texte {message}",
+            "créer un rappel avec le texte suivant {message}",
+            "créer un rappel",
+            "crée un rappel",
+            "crée un rappel avec le message {message}",
+            "crée un rappel avec le message suivant {message}",
+            "crée un rappel avec le texte {message}",
+            "crée un rappel avec le texte suivant {message}",
+            "rappelle-moi mon échéance",
+            "rappelle-moi mon échéance avec le message {message}",
+            "rappelle-moi mon échéance avec le message suivant {message}",
+            "rappelle-moi mon échéance avec le texte {message}",
+            "rappelle-moi mon échéance avec le texte suivant {message}",
+            "mets un rappel pour mon échéance",
+            "mets un rappel ",
+            "mets un rappel avec le message {message}",
+            "mets un rappel avec le message suivant {message}",
+            "mets un rappel avec le texte {message}",
+            "mets un rappel avec le texte suivant {message}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "id": "12",
+              "name": {
+                "value": "décembre"
+              }
+            },
+            {
+              "id": "11",
+              "name": {
+                "value": "novembre"
+              }
+            },
+            {
+              "id": "10",
+              "name": {
+                "value": "octobre"
+              }
+            },
+            {
+              "id": "09",
+              "name": {
+                "value": "septembre"
+              }
+            },
+            {
+              "id": "08",
+              "name": {
+                "value": "août"
+              }
+            },
+            {
+              "id": "07",
+              "name": {
+                "value": "juillet"
+              }
+            },
+            {
+              "id": "06",
+              "name": {
+                "value": "juin"
+              }
+            },
+            {
+              "id": "05",
+              "name": {
+                "value": "mai"
+              }
+            },
+            {
+              "id": "04",
+              "name": {
+                "value": "avril"
+              }
+            },
+            {
+              "id": "03",
+              "name": {
+                "value": "mars"
+              }
+            },
+            {
+              "id": "02",
+              "name": {
+                "value": "février"
+              }
+            },
+            {
+              "id": "01",
+              "name": {
+                "value": "janvier",
+                "synonyms": [
+                  "premier mois de l\u0027année"
+                ]
+              }
+            }
+          ],
+          "name": "MonthSlotType"
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "RegisterDeadlineIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent.746177723927"
+          },
+          "slots": [
+            {
+              "name": "nameDeadline",
+              "type": "AMAZON.FirstName",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.773308306416.296508396837"
+              }
+            },
+            {
+              "name": "day",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.653974572406.1040382425372"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Slot.Validation.190694681136.1424851421300.1030431910159",
+                  "value": "1"
+                },
+                {
+                  "type": "isLessThanOrEqualTo",
+                  "prompt": "Slot.Validation.190694681136.1424851421300.837658517617",
+                  "value": "31"
+                }
+              ]
+            },
+            {
+              "name": "month",
+              "type": "MonthSlotType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.282358190483.487594834711"
+              },
+              "validations": [
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.190694681136.463018349705.1461889218555"
+                }
+              ]
+            },
+            {
+              "name": "year",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1253554922892.1358447173887"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Slot.Validation.773308306416.340968876770.1226683121718",
+                  "value": "2021"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ChangeDateIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent.815067956585"
+          },
+          "slots": [
+            {
+              "name": "nameDeadline",
+              "type": "AMAZON.FirstName",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "day",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.653974572406.1040382425372"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Slot.Validation.190694681136.1424851421300.1030431910159",
+                  "value": "1"
+                },
+                {
+                  "type": "isLessThanOrEqualTo",
+                  "prompt": "Slot.Validation.190694681136.1424851421300.837658517617",
+                  "value": "31"
+                }
+              ]
+            },
+            {
+              "name": "month",
+              "type": "MonthSlotType",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.282358190483.487594834711"
+              },
+              "validations": [
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.190694681136.463018349705.1461889218555"
+                }
+              ]
+            },
+            {
+              "name": "year",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1253554922892.1358447173887"
+              },
+              "validations": [
+                {
+                  "type": "isGreaterThanOrEqualTo",
+                  "prompt": "Slot.Validation.773308306416.340968876770.1226683121718",
+                  "value": "2021"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "GetDateDeadlineIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "nameDeadline",
+              "type": "AMAZON.FirstName",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1306558034700.598787697786"
+              }
+            }
+          ]
+        },
+        {
+          "name": "RemindDeadlineIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent.556115415325"
+          },
+          "slots": [
+            {
+              "name": "message",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.556115415325.557149889298"
+              }
+            }
+          ]
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.653974572406.1040382425372",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Quel est votre jour d\u0027échéance ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Quel jour?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Dites-moi votre jour d\u0027échéance ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.282358190483.487594834711",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "le {day} de quel mois ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Quel est votre mois d\u0027échéance ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Quel mois?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Dites-moi votre mois d\u0027échéance ?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.190694681136.1424851421300.1030431910159",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "{day} n\u0027est pas un jour valide. Dites-moi un jour plus grand que zéro?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.190694681136.1424851421300.837658517617",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Un mois a au maximum trente et un jours, {day} n\u0027est pas possible. Quel est votre jour d\u0027échéance ?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.190694681136.463018349705.1461889218555",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "{month} n\u0027est pas un mois. Quel est votre mois d\u0027échéance ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1253554922892.1358447173887",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Le {day} {month} de quelle année ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Quelle est votre année d\u0027échéance ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Dites-moi votre année d\u0027échéance ?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Intent.746177723927",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "le {nameDeadline} pour {month} {year} , c\u0027est bien ça?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Voulez-vous enregistrer le  {day} {month} {year} comme votre date d\u0027échéance pour {nameDeadline} ?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.773308306416.340968876770.1226683121718",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "cette année est déjà passée. donnez moi une année valide"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.773308306416.296508396837",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "quel est le nom de l\u0027échéance?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Intent.815067956585",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Voulez-vous enregistrer le  {day} {month} {year} comme votre date d\u0027échéance "
+          },
+          {
+            "type": "PlainText",
+            "value": "la nouvel date d\u0027échéance  est le {day} {month} {year} , c\u0027est bien ça ?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.815067956585.1422172398154",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "l\u0027année "
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.815067956585.1534736050435",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "le mois"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.815067956585.118432079115",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "le jour"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1306558034700.598787697786",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "donner moi le nom de l\u0027échéance"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Intent.1365761017334",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "{nameDeadline} c\u0027est bien ça?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.556115415325.557149889298",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Dites-moi le message à vous rappeler pour votre échéance ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Quel message dois-je vous lire pour votre échéance ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Quel est le message que vous voulez que je vous rappelle ?"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Intent.556115415325",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Je vous enverrais le message suivant pour votre échéance. {message} . Etes-vous d\u0027accord ?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Le message {message} vous sera envoyé pour votre échéance. Est-ce que vous me le confirmer ?"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "28"
+}
