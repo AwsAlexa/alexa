@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "mes échéances",
+      "invocationName": "my deadlines",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -22,7 +22,7 @@
               "name": "nameDeadline",
               "type": "AMAZON.FirstName",
               "samples": [
-                "le {nameDeadline}",
+                "the {nameDeadline}",
                 "{nameDeadline}"
               ]
             },
@@ -31,49 +31,44 @@
               "type": "AMAZON.NUMBER",
               "samples": [
                 "{day}",
-                "le {day}",
-                "le {day} {month}",
-                "le {day} {month} {year}",
-                "mon échéance est pour le {day} {month}",
-                "mon échéance est le {day} {month} {year}"
+                "the {day}",
+                "the {day} of {month}",
+                "the deadline for the {day} of {month} of {year}"
               ]
             },
             {
               "name": "month",
               "type": "MonthSlotType",
               "samples": [
-                "mon mois d\u0027échéance est {month}",
-                "le mois de {month}",
+                "the month for the deadline is {month}",
+                "the month of {month}",
                 "{month}",
-                "en {month}"
+                "in {month}"
               ]
             },
             {
               "name": "year",
               "type": "AMAZON.NUMBER",
               "samples": [
-                "en {year}",
-                "l\u0027année de mon échéance est {year}",
-                "en {year}",
-                "l\u0027année {year}",
-                "l\u0027an {year}",
+                "in {year}",
+                "the year of the deadline is {year}",
+                "the year {year}",
                 "{year}"
               ]
             }
           ],
           "samples": [
-            "le {nameDeadline} pour {day} {month} {year}",
-            "le {day} du mois de {month}",
-            "le {day} du mois d\u0027 {month}",
-            "le {day} {month} de l\u0027année {year}",
-            "enregistre une nouvelle échéance",
-            "enregistrer ma date d\u0027échéance",
-            "enregistrer mon échéance",
-            "mon échéance est le {day} {month} {year}",
-            "mon échéance est le {day} {month}",
-            "ma date d\u0027échéance est le {day} {month} {year}",
-            "ma date d\u0027échéance est le {day} {month}",
-            "le {day} {month} {year}"
+            "the {nameDeadline} is for {day} {month} {year}",
+            "the {day} of the month {month}",
+            "the {day} {month} of the year {year}",
+            "create a new deadline",
+            "create a new date for a deadline ",
+            "create a deadline",
+            "my deadline is on {day} {month} {year}",
+            "my deadline is the {day} {month}",
+            "my date for the deadline is the {day} {month} {year}",
+            "my date for the deadline is the {day} {month}",
+            "the {day} {month} {year}"
           ]
         },
         {
@@ -84,20 +79,16 @@
           "name": "SayDeadlineIntent",
           "slots": [],
           "samples": [
-            "me dire le nombre de jours avant mon échéance",
-            "dis-moi combien de temps reste-t-il avant mon échéance",
-            "dis-moi quand est mon échéance",
-            "quand est mon échéance",
-            "il reste combien de temps avant mon échéance",
-            "il reste combien de jours avant mon échéance",
-            "combien de temps reste-t-il",
-            "combien de temps reste-t-il avant mon échéance",
-            "combien de jours reste-t-il",
-            "combien de jours reste-t-il avant mon échéance",
-            "combien de jours avant mon échéance",
-            "nombre de jours restant",
-            "nombre de jours restant avant mon échéance",
-            "nombre de jours avant mon échéance"
+            "tell me how many days left before my deadline",
+            "tell me how much time left before my deadline",
+            "tell me when is my deadline",
+            "when is my deadline",
+            "how much time is left before my deadline",
+            "how many days are left before my deadline",
+            "how much time is left",
+            "how many days are left",
+            "number of days left",
+            "number of days left before my deadline"
           ]
         },
         {
@@ -107,7 +98,7 @@
               "name": "nameDeadline",
               "type": "AMAZON.FirstName",
               "samples": [
-                "le {nameDeadline}",
+                "the {nameDeadline}",
                 "{nameDeadline}"
               ]
             },
@@ -116,55 +107,54 @@
               "type": "AMAZON.NUMBER",
               "samples": [
                 "{day}",
-                "le {day}",
-                "le {day} {month}",
-                "le {day} {month} {year}",
-                "je suis né le {day} {month}",
-                "je suis né le {day} {month} {year}"
+                "the {day}",
+                "the {day} {month}",
+                "the {day} {month} {year}",
+                "I was born on {day} {month}",
+                "I was born on {day} {month} of {year}"
               ]
             },
             {
               "name": "month",
               "type": "MonthSlotType",
               "samples": [
-                "mon mois de naissance est {month}",
-                "je suis né le mois de {month}",
+                "my birth month is {month}",
+                "I was born on the month of {month}",
                 "{month}",
-                "en {month}"
+                "in {month}"
               ]
             },
             {
               "name": "year",
               "type": "AMAZON.NUMBER",
               "samples": [
-                "je suis né en {year}",
-                "mon année de naissance est {year}",
-                "en {year}",
-                "l\u0027année {year}",
-                "l\u0027an {year}",
+                "I was born in {year}",
+                "my year of birth is {year}",
+                "in {year}",
+                "the year {year}",
                 "{year}"
               ]
             }
           ],
           "samples": [
-            "Change ma date d\u0027 échéance",
+            "Change my deadline date",
             "{day} {month} {year}",
-            "le {day} {month} {year} "
+            "the {day} {month} of {year} "
           ]
         },
         {
           "name": "GetRemoteDataIntent",
           "slots": [],
           "samples": [
-            "lister mes échéances"
+            "list my deadlines"
           ]
         },
         {
           "name": "GetNextDeadlineIntent",
           "slots": [],
           "samples": [
-            "Dis-moi la prochaine échéance",
-            "la prochaine échéance"
+            "Tell me my next deadline",
+            "The next deadline"
           ]
         },
         {
@@ -174,14 +164,14 @@
               "name": "nameDeadline",
               "type": "AMAZON.FirstName",
               "samples": [
-                "le {nameDeadline}",
+                "the deadline {nameDeadline}",
                 "{nameDeadline}"
               ]
             }
           ],
           "samples": [
-            "donner la date d\u0027échéance ",
-            "date d\u0027échéance pour le {nameDeadline}"
+            "Give me the date for the deadline ",
+            "the deadline date for {nameDeadline}"
           ]
         },
         {
@@ -196,27 +186,18 @@
             }
           ],
           "samples": [
-            "créer un rappel avec le message {message}",
-            "créer un rappel avec le message suivant {message}",
-            "créer un rappel avec le texte {message}",
-            "créer un rappel avec le texte suivant {message}",
-            "créer un rappel",
-            "crée un rappel",
-            "crée un rappel avec le message {message}",
-            "crée un rappel avec le message suivant {message}",
-            "crée un rappel avec le texte {message}",
-            "crée un rappel avec le texte suivant {message}",
-            "rappelle-moi mon échéance",
-            "rappelle-moi mon échéance avec le message {message}",
-            "rappelle-moi mon échéance avec le message suivant {message}",
-            "rappelle-moi mon échéance avec le texte {message}",
-            "rappelle-moi mon échéance avec le texte suivant {message}",
-            "mets un rappel pour mon échéance",
-            "mets un rappel ",
-            "mets un rappel avec le message {message}",
-            "mets un rappel avec le message suivant {message}",
-            "mets un rappel avec le texte {message}",
-            "mets un rappel avec le texte suivant {message}"
+            "create a reminder with the message {message}",
+            "create a reminder with the message as follows {message}",
+            "create a reminder with the text {message}",
+            "create a reminder with the text as follows {message}",
+            "create a reminder",
+            "remind me of my deadline",
+            "remind me of my deadline with the message {message}",
+            "remind me of my deadline with the message as follows {message}",
+            "remind me of my deadline with the text {message}",
+            "remind me of my deadline with the text as follows {message}",
+            "create a reminder for my deadline",
+            "create a reminder"
           ]
         }
       ],
@@ -226,75 +207,75 @@
             {
               "id": "12",
               "name": {
-                "value": "décembre"
+                "value": "december"
               }
             },
             {
               "id": "11",
               "name": {
-                "value": "novembre"
+                "value": "november"
               }
             },
             {
               "id": "10",
               "name": {
-                "value": "octobre"
+                "value": "october"
               }
             },
             {
               "id": "09",
               "name": {
-                "value": "septembre"
+                "value": "september"
               }
             },
             {
               "id": "08",
               "name": {
-                "value": "août"
+                "value": "august"
               }
             },
             {
               "id": "07",
               "name": {
-                "value": "juillet"
+                "value": "july"
               }
             },
             {
               "id": "06",
               "name": {
-                "value": "juin"
+                "value": "june"
               }
             },
             {
               "id": "05",
               "name": {
-                "value": "mai"
+                "value": "may"
               }
             },
             {
               "id": "04",
               "name": {
-                "value": "avril"
+                "value": "april"
               }
             },
             {
               "id": "03",
               "name": {
-                "value": "mars"
+                "value": "march"
               }
             },
             {
               "id": "02",
               "name": {
-                "value": "février"
+                "value": "february"
               }
             },
             {
               "id": "01",
               "name": {
-                "value": "janvier",
+                "value": "january",
                 "synonyms": [
-                  "premier mois de l\u0027année"
+                  "first month of the year"
                 ]
               }
             }
@@ -486,15 +467,15 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "Quel est votre jour d\u0027échéance ?"
+            "value": "What is the day for your deadline?"
           },
           {
             "type": "PlainText",
-            "value": "Quel jour?"
+            "value": "What day?"
           },
           {
             "type": "PlainText",
-            "value": "Dites-moi votre jour d\u0027échéance ?"
+            "value": "Tell me the day of your deadline?"
           }
         ]
       },
@@ -503,19 +484,19 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "le {day} de quel mois ?"
+            "value": "the {day} of what month?"
           },
           {
             "type": "PlainText",
-            "value": "Quel est votre mois d\u0027échéance ?"
+            "value": "What is the month for your deadline?"
           },
           {
             "type": "PlainText",
-            "value": "Quel mois?"
+            "value": "What month?"
           },
           {
             "type": "PlainText",
-            "value": "Dites-moi votre mois d\u0027échéance ?"
+            "value": "Tell me the month of your deadline?"
           }
         ]
       },
@@ -524,7 +505,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "{day} n\u0027est pas un jour valide. Dites-moi un jour plus grand que zéro?"
+            "value": "{day} is not a valid day. Tell me a day larger than zero."
           }
         ]
       },
@@ -533,7 +514,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "Un mois a au maximum trente et un jours, {day} n\u0027est pas possible. Quel est votre jour d\u0027échéance ?"
+            "value": "A month is thirty one days at most, {day} is not possible. What is the day for your deadline?"
           }
         ]
       },
@@ -542,7 +523,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "{month} n\u0027est pas un mois. Quel est votre mois d\u0027échéance ?"
+            "value": "{month} is not a valid month. What is the month for your deadline?"
           }
         ]
       },
@@ -551,15 +532,15 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "Le {day} {month} de quelle année ?"
+            "value": "The {day} {month} of what year?"
           },
           {
             "type": "PlainText",
-            "value": "Quelle est votre année d\u0027échéance ?"
+            "value": "What is the year for your deadline?"
           },
           {
             "type": "PlainText",
-            "value": "Dites-moi votre année d\u0027échéance ?"
+            "value": "Tell me the year for your deadline?"
           }
         ]
       },
@@ -568,11 +549,11 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "le {nameDeadline} pour {month} {year} , c\u0027est bien ça?"
+            "value": "The {nameDeadline} for {day} {month} {year} , is that correct?"
           },
           {
             "type": "PlainText",
-            "value": "Voulez-vous enregistrer le  {day} {month} {year} comme votre date d\u0027échéance pour {nameDeadline} ?"
+            "value": "Do you what to save {day} {month} {year} as your deadline date for {nameDeadline} ?"
           }
         ]
       },
@@ -581,7 +562,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "cette année est déjà passée. donnez moi une année valide"
+            "value": "That year has already passed. Give me a valid year."
           }
         ]
       },
@@ -590,7 +571,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "quel est le nom de l\u0027échéance?"
+            "value": "What is the name for your deadline?"
           }
         ]
       },
@@ -599,11 +580,11 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "Voulez-vous enregistrer le  {day} {month} {year} comme votre date d\u0027échéance "
+            "value": "Do you want to save {day} {month} {year} as your deadline date? "
           },
           {
             "type": "PlainText",
-            "value": "la nouvel date d\u0027échéance  est le {day} {month} {year} , c\u0027est bien ça ?"
+            "value": "your new deadline date is {day} {month} {year} , is that correct ?"
           }
         ]
       },
@@ -612,7 +593,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "l\u0027année "
+            "value": "the year"
           }
         ]
       },
@@ -621,7 +602,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "le mois"
+            "value": "the month"
           }
         ]
       },
@@ -630,7 +611,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "le jour"
+            "value": "the day"
           }
         ]
       },
@@ -639,7 +620,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "donner moi le nom de l\u0027échéance"
+            "value": "Tell me the name of the dealine"
           }
         ]
       },
@@ -648,7 +629,7 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "{nameDeadline} c\u0027est bien ça?"
+            "value": "{nameDeadline} is correct?"
           }
         ]
       },
@@ -657,15 +638,15 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "Dites-moi le message à vous rappeler pour votre échéance ?"
+            "value": "Tell me the message as a reminder for your deadline?"
           },
           {
             "type": "PlainText",
-            "value": "Quel message dois-je vous lire pour votre échéance ?"
+            "value": "What is the message I should read for your deadline ?"
           },
           {
             "type": "PlainText",
-            "value": "Quel est le message que vous voulez que je vous rappelle ?"
+            "value": "What is the message that you want to be reminded of?"
           }
         ]
       },
@@ -674,15 +655,15 @@
         "variations": [
           {
             "type": "PlainText",
-            "value": "Je vous enverrais le message suivant pour votre échéance. {message} . Etes-vous d\u0027accord ?"
+            "value": "I will send you the following message for the deadline. {message} . Is that you correct?"
           },
           {
             "type": "PlainText",
-            "value": "Le message {message} vous sera envoyé pour votre échéance. Est-ce que vous me le confirmer ?"
+            "value": "The message will be send for the deadline. {message} . Do you confirm this?"
           }
         ]
       }
     ]
   },
-  "version": "35"
+  "version": "5"
 }

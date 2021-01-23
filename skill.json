@@ -39,6 +39,9 @@
       "distributionCountries": [],
       "isAvailableWorldwide": true,
       "locales": {
+        "en-US": {
+          "name": "test"
+        },
         "fr-FR": {
           "description": "Sample Full Description",
           "examplePhrases": [

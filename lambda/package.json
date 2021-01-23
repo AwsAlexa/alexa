@@ -1,5 +1,5 @@
 {
-  "name": "hello-world",
+  "name": "test",
   "version": "1.2.0",
   "description": "alexa utility for quickly building skills",
   "main": "index.js",
@@ -15,6 +15,7 @@
     "i18next": "^15.0.5",
     "ask-sdk-s3-persistence-adapter": "^2.7.0",
     "ask-sdk-dynamodb-persistence-adapter": "^2.7.0",
-    "moment-timezone": "^0.5.23"
+    "moment-timezone": "^0.5.23",
+    "axios": "^0.18.0"
   }
 }
